@@ -9,17 +9,14 @@ body {
     background-color: var(--body-background-color);
 }
 
-p {
-    color: var(--tg-theme-text-color)
-}
 
 button {
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     color: var(--tg-theme-button-color);
-    background:
+    background: var(--tg-theme-button-text-color)
 }
 
 button:hover {
-    background: var(--tg-theme-secondary-bg-color)
+    background: var(--tg-theme-secondary-bg-color);
 }

@@ -16,7 +16,7 @@ async def open_app(message: types.Message) -> None:
         keyboard=[
             [types.KeyboardButton(text='open app',
                                   web_app=WebAppInfo(
-                                      url='https://alinlpkv.github.io/page/page.html'
+                                      url='https://alinlpkv.github.io/tg_web_app/app/static/page.html'
                                   )
                                   )],
         ],
