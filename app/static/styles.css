@@ -13,7 +13,7 @@ body, html {
 }
 
 button {
-    border: 0;
+
     cursor: pointer;
     padding: 10px 20px;
     -webkit-tap-highlight-color: transparent;
@@ -35,4 +35,18 @@ button:hover {
 
 h1 {
     color: var(--tg-theme-text-color)
+}
+
+input {
+    width: 80%;
+    outline: none;
+    font-size: 14px;
+    margin: 10px 5%;
+    padding: 15px 10px;
+    border: 2px solid silver;
+    border-radius: 3px;
+}
+
+input:focus {
+    border-color: #4682B4;
 }
