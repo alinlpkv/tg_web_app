@@ -12,16 +12,14 @@ router = Router()
 
 @router.message(Command('app'))
 async def open_app(message: types.Message) -> None:
-    markup = types.ReplyKeyboardMarkup(
+    markup = types.InlineKeyboardMarkup(
         keyboard=[
-            [types.KeyboardButton(text='open app',
-                                  web_app=WebAppInfo(
-                                      url='https://alinlpkv.github.io/tg_web_app/app/static/page.html'
-                                  )
-                                  )],
+            [types.InlineKeyboardButton(text='open app',
+                                        web_app=WebAppInfo(
+                                            url='https://alinlpkv.github.io/tg_web_app/app/static/page.html'
+                                        )
+                                        )],
         ],
         resize_keyboard=True,
     )
     await message.answer('For create meeting', reply_markup=markup)
-
-

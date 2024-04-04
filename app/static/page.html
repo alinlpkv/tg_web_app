@@ -23,8 +23,12 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
         let tg = window.Telegram.WebApp;
-        let create = document.getElementById("create")
-        let description = document.getElementById("create")
+        let create = document.getElementById("create");
+        let description = document.getElementById("create");
+
+        create.addEventListener("click", () => {
+            tg.close()
+        });
     </script>
 </body>
 </html>
