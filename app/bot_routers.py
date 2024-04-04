@@ -31,11 +31,11 @@ async def open_app(message: types.Message) -> None:
 @router.message(F.web_app_data)
 async def web_app(message: types.Message):
     data = json.loads(message.web_app_data.data)
+    meeting_name = data.get('meeting_name')
+    await message.answer(f'Meeting "{meeting_name}" created!')
     user_email = await meeting_crud.get_user_email(user_id=message.from_user.id)
     print(user_email, message.from_user.id)
     data['user_id'] = message.from_user.id
     data['user_email'] = user_email
     await meeting_crud.add_meeting(data)
-    meeting_name = data.get('meeting_name')
-    await message.answer(f'Meeting "{meeting_name}" created!')
 

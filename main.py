@@ -4,7 +4,6 @@ import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.fsm.storage.memory import MemoryStorage
 from dotenv import load_dotenv
-from sqlalchemy.ext.asyncio import create_async_engine
 
 from app.bot_routers import router
 
@@ -24,7 +23,6 @@ async def start_bot():
 
 
 if __name__ == '__main__':
-    engine = create_async_engine(os.getenv('DATA_BASE_URL'))
     try:
         print('bot start')
         asyncio.run(start_bot())
