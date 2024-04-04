@@ -27,12 +27,11 @@
         let description = document.getElementById("create");
 
         create.addEventListener("click", () => {
-            let meeting_name = document.getElementByID("meeting_name").value;
-            let meeting_description = document.getElementByID("meeting_description").value;
-            let meeting_date = document.getElementByID("meeting_date").value;
+            let meeting_name = document.getElementById("meeting_name").value;
+            let meeting_description = document.getElementById("meeting_description").value;
+            let meeting_date = document.getElementById("meeting_date").value;
 
             let data = {
-                user_name: user_name,
                 meeting_name: meeting_name,
                 meeting_description: meeting_description,
                 meeting_date: meeting_date
