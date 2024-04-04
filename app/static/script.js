@@ -2,8 +2,10 @@ const tg = window.Telegram.WebApp;
 tg.expand();
 
 
-let user_name = document.getElementById("user_name");
-user_name.innerText = tg.initDataUnsafe.user.first_name;
+//let user_name = document.getElementById("user_name");
+//user_name.innerText = tg.initDataUnsafe.user.first_name;
+<!--                document.getElementById("user_name").value = tg.initDataUnsafe.user.first_name;-->
+<!--                let create = document.getElementById("create");-->
 
 let create = document.getElementById("create");
 create.addEventListener("click", () => {

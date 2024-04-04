@@ -25,9 +25,6 @@
                 let tg = window.Telegram.WebApp;
                 tg.expand();
 
-                document.getElementById("user_name").value = tg.initDataUnsafe.user.first_name;
-                let create = document.getElementById("create");
-
                 create.addEventListener("click", () => {
                     let meeting_name = document.getElementById("meeting_name").value;
                     let meeting_description = document.getElementById("meeting_description").value;

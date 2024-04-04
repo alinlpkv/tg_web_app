@@ -9,6 +9,8 @@ readme = "README.md"
 python = "^3.10"
 aiogram = "3"
 python-dotenv = "^1.0.1"
+asyncpg = "^0.29.0"
+sqlalchemy = "^2.0.29"
 
 
 [build-system]
