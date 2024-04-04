@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
     <title>Create meeting</title>
 </head>
 <body>
@@ -21,5 +20,27 @@
         </form>
         <div><button id="create" class="cart-item__button">Create meeting</button></div>
     </div>
+    <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let tg = window.Telegram.WebApp;
+                tg.expand();
+                let create = document.getElementById("create");
+
+                create.addEventListener("click", () => {
+                    let meeting_name = document.getElementById("meeting_name").value;
+                    let meeting_description = document.getElementById("meeting_description").value;
+                    let meeting_date = document.getElementById("meeting_date").value;
+
+                    let data = {
+                        meeting_name: meeting_name,
+                        meeting_description: meeting_description,
+                        meeting_date: meeting_date
+                    };
+
+                    tg.sendData(JSON.stringify(data));
+                    tg.close();
+                });
+            });
+        </script>
 </body>
 </html>
