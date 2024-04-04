@@ -20,28 +20,28 @@
         <div><button id="create" class="cart-item__button">Create meeting</button></div>
     </div>
 
-    <script>
-        let tg = window.Telegram.WebApp;
-        tg.expand();
-        let create = document.getElementById("create");
-        let description = document.getElementById("create");
-
-        create.addEventListener("click", () => {
-            let meeting_name = document.getElementById("meeting_name").value;
-            let meeting_description = document.getElementById("meeting_description").value;
-            let meeting_date = document.getElementById("meeting_date").value;
-
-            let data = {
-                meeting_name: meeting_name,
-                meeting_description: meeting_description,
-                meeting_date: meeting_date
-            };
-
-            tg.sendData(JSON.stringify(data));
-            tg.close();
-        });
-
-    </script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let tg = window.Telegram.WebApp;
+            tg.expand();
+            let create = document.getElementById("create");
+
+            create.addEventListener("click", () => {
+                let meeting_name = document.getElementById("meeting_name").value;
+                let meeting_description = document.getElementById("meeting_description").value;
+                let meeting_date = document.getElementById("meeting_date").value;
+
+                let data = {
+                    meeting_name: meeting_name,
+                    meeting_description: meeting_description,
+                    meeting_date: meeting_date
+                };
+
+                tg.sendData(JSON.stringify(data));
+                tg.close();
+            });
+        });
+    </script>
 </body>
 </html>

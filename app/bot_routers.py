@@ -19,18 +19,19 @@ async def open_app(message: types.Message) -> None:
     app_url = 'https://alinlpkv.github.io/tg_web_app/app/static/page.html'
     markup = types.ReplyKeyboardMarkup(
         keyboard=[
-            [types.KeyboardButton(text='open app',web_app=WebAppInfo(url=app_url))],
+            [types.KeyboardButton(text='open app', web_app=WebAppInfo(url=app_url))],
         ],
         resize_keyboard=True,
     )
     await message.answer('For create meeting', reply_markup=markup)
 
 
-# @router.message(F.web_app_data)
-# async def web_app(message: types.Message):
-#     data = json.loads(message.web_app_data.data)
-#     meeting_name = data.get('meeting_name')
-#     await message.answer(f'Meeting "{meeting_name}" created!')
+@router.message(F.web_app_data)
+async def web_app(message: types.Message):
+    data = json.loads(message.web_app_data.data)
+    meeting_name = data.get('meeting_name')
+    await message.answer(f'Meeting "{meeting_name}" created!')
+
 
 class WebAppDataFilter(Filter):
     async def __call__(self, message: Message, **kwargs) -> Union[bool, Dict[str, Any]]:
