@@ -25,10 +25,24 @@
         let tg = window.Telegram.WebApp;
         let create = document.getElementById("create");
         let description = document.getElementById("create");
+        tg.expand();
 
         create.addEventListener("click", () => {
+            let meeting_name = document.getElementByID("meeting_name").value;
+            let meeting_description = document.getElementByID("meeting_description").value;
+            let meeting_date = document.getElementByID("meeting_date").value;
             tg.close();
         });
+
+
+        let data = {
+            user_name: user_name,
+            meeting_name: meeting_name,
+            meeting_description: meeting_description,
+            meeting_date: meeting_date
+        }
+
+        tg.sendData(JSON.stringify(data));
     </script>
 </body>
 </html>

@@ -6,15 +6,15 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.utils.chat_action import ChatActionMiddleware
 from aiogram.utils.keyboard import InlineKeyboardBuilder
-
+import json
 router = Router()
 
 
 @router.message(Command('app'))
 async def open_app(message: types.Message) -> None:
-    markup = types.InlineKeyboardMarkup(
+    markup = types.ReplyKeyboardMarkup(
         keyboard=[
-            [types.InlineKeyboardButton(text='open app',
+            [types.KeyboardButton(text='open app',
                                         web_app=WebAppInfo(
                                             url='https://alinlpkv.github.io/tg_web_app/app/static/page.html'
                                         )
@@ -23,3 +23,10 @@ async def open_app(message: types.Message) -> None:
         resize_keyboard=True,
     )
     await message.answer('For create meeting', reply_markup=markup)
+
+
+@router.message(content_types=['web_app_data'])
+async def web_app(message: types.Message):
+    data = json.loads(message.web_app_data.data)
+    meeting_name = data.get('meeting_name')
+    await message.answer(f'Meeting "{meeting_name}" created!')
