@@ -15,7 +15,10 @@ async def open_app(message: types.Message) -> None:
     markup = types.ReplyKeyboardMarkup(
         keyboard=[
             [types.KeyboardButton(text='open app',
-                                  web_app=WebAppInfo(url='https://github.com'))],
+                                  web_app=WebAppInfo(
+                                      url='https://alinlpkv.github.io/page/page.html'
+                                  )
+                                  )],
         ],
         resize_keyboard=True,
     )
