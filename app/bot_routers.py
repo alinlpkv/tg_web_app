@@ -7,6 +7,9 @@ from aiogram.fsm.state import State, StatesGroup
 from aiogram.utils.chat_action import ChatActionMiddleware
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 import json
+from typing import Union, Dict, Any
+from aiogram.filters import Filter
+from aiogram.types import Message
 
 router = Router()
 
@@ -23,8 +26,20 @@ async def open_app(message: types.Message) -> None:
     await message.answer('For create meeting', reply_markup=markup)
 
 
-@router.message(F.web_app_data)
-async def web_app(message: types.Message):
-    data = json.loads(message.web_app_data.data)
-    meeting_name = data.get('meeting_name')
+# @router.message(F.web_app_data)
+# async def web_app(message: types.Message):
+#     data = json.loads(message.web_app_data.data)
+#     meeting_name = data.get('meeting_name')
+#     await message.answer(f'Meeting "{meeting_name}" created!')
+
+class WebAppDataFilter(Filter):
+    async def __call__(self, message: Message, **kwargs) -> Union[bool, Dict[str, Any]]:
+        return dict(web_app_data=message.web_app_data) if message.web_app_data else False
+
+
+@router.message(WebAppDataFilter())
+async def handle_web_app_data(message: types.Message, web_app_data: types.WebAppData):
+    print(web_app_data)
+    web_app_data = json.loads(message.web_app_data.data)
+    meeting_name = web_app_data.get('meeting_name')
     await message.answer(f'Meeting "{meeting_name}" created!')
