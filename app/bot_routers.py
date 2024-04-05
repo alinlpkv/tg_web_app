@@ -40,3 +40,5 @@ async def web_app(message: types.Message):
     data['user_email'] = user_email
     await meeting_crud.add_meeting(data)
 
+
+# TODO: если второе поле даты пустое - заполнить на +1 минуту

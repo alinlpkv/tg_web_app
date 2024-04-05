@@ -38,19 +38,19 @@
     <div><h3>Создание встречи</h3></div>
     <form id="meeting_info">
         <div class='input-group date' id='datetimepicker1'>
-            <input type='text' class="form-control form-input" />
+            <input type='text' placeholder="Время начала" class="form-control form-input" />
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
         </div>
         <div class='input-group date' id='datetimepicker2'>
-            <input type='text' class="form-control form-input" />
+            <input type='text' placeholder="Окончание" class="form-control form-input" />
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
         </div>
         <input type="text" placeholder="Тема" id="meeting_name" class="form-input">
-        <input type="text" placeholder="Описание" id="meeting_description" class="form-input" style="height:100px">
+        <textarea class="form-input" placeholder="Описание" id="meeting_description" min-rows=""></textarea>
     </form>
     <div style="margin:10px;"><button id="create" class="cart-item__button">Create meeting</button></div>
 </div>
