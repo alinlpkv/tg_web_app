@@ -64,32 +64,31 @@
         </form>
         <div style="margin:10px;"><button id="create" class="cart-item__button">Create meeting</button></div>
     </div>
-    <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                let tg = window.Telegram.WebApp;
-                tg.expand();
+ <script>
+    $(document).ready(function() {
+        let tg = window.Telegram.WebApp;
+        tg.expand();
 
-                create.addEventListener("click", () => {
-                    let meeting_name = document.getElementById("meeting_name").value;
-                    let meeting_description = document.getElementById("meeting_description").value;
-                    let meeting_date = document.getElementById("meeting_date").value;
+        $('#create').click(function() {
+            let meeting_name = $('#meeting_name').val();
+            let meeting_description = $('#meeting_description').val();
+            let meeting_date = $('#datetimepicker1').find('input').val();
 
-                    let data = {
-                        meeting_name: meeting_name,
-                        meeting_description: meeting_description,
-                        meeting_date: meeting_date
-                    };
+            let data = {
+                meeting_name: meeting_name,
+                meeting_description: meeting_description,
+                meeting_date: meeting_date
+            };
 
-                    tg.sendData(JSON.stringify(data));
-                    tg.close();
-                });
+            tg.sendData(JSON.stringify(data));
+            tg.close();
+        });
 
-            });
-        $(function () {
-                    $('#datetimepicker1').datetimepicker(
-                        {locale: moment.locale('ru')}
-                    );
-                });
-        </script>
+        $('#datetimepicker1').datetimepicker({
+            locale: moment.locale('ru')
+        });
+    });
+</script>
+
 </body>
 </html>
