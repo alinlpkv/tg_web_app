@@ -28,6 +28,7 @@ button:hover {
     font-size: 16px;
     align-items: center;
     justify-content: center;
+    border: 2px solid #4682B4;
 }
 
 h1 {

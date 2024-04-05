@@ -20,6 +20,7 @@
         .input-group.date {
             width: 80%;
             margin: 0 auto; /* Centering the block */
+            margin-bottom: 10px;
         }
 
         .input-group.date .form-control {
@@ -36,15 +37,14 @@
 <div id="main">
     <div><h1>Create meeting</h1></div>
     <form id="meeting_info">
-        <input type="text" placeholder="Meeting name" id="meeting_name" class="form-input">
-        <input type="text" placeholder="Description" id="meeting_description" class="form-input">
-
         <div class='input-group date' id='datetimepicker1'>
             <input type='text' class="form-control form-input" />
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
         </div>
+        <input type="text" placeholder="Meeting name" id="meeting_name" class="form-input">
+        <input type="text" placeholder="Description" id="meeting_description" class="form-input" style="height:100px">
     </form>
     <div style="margin:10px;"><button id="create" class="cart-item__button">Create meeting</button></div>
 </div>

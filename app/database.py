@@ -22,7 +22,7 @@ class MeetingCRUD:
         description = data.get('meeting_description')
         date = data.get('meeting_date')
         user_email = data.get('user_email')
-        date = dt.datetime.strptime(date, '%Y-%m-%d',)
+        date = dt.datetime.strptime(date, '%d.%m.%Y %H:%M')
 
         query = text('insert into meeting (user_id, name, description, date, user_email) '
                      'values (:user_id, :name, :description, :date, :user_email)')
