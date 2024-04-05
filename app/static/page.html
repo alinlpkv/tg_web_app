@@ -18,53 +18,37 @@
     <title>Create meeting</title>
     <style>
         .input-group.date {
-    width: 80%;
-    margin: 0 auto; /* Centering the block */
-}
+            width: 80%;
+            margin: 0 auto; /* Centering the block */
+        }
 
-.input-group.date .form-control {
-    width: 100%;
-}
+        .input-group.date .form-control {
+            width: 100%;
+        }
 
         /* Добавляем отступы между элементами формы */
         .form-input {
             margin-bottom: 10px;
         }
-        <style>
-    /* Добавляем отступы между элементами формы */
-    .form-input {
-        margin-bottom: 10px;
-    }
-
-    .input-group.date {
-        width: 80%;
-        margin: 0 auto; /* Centering the block */
-    }
-
-    .input-group.date .form-control {
-        width: 100%;
-    }
-</style>
-
     </style>
 </head>
 <body>
-    <div id="main">
-        <div><h1>Create meeting</h1></div>
-        <form id="meeting_info">
-                <input type="text" placeholder="Meeting name" id="meeting_name" class="form-input">
-                <input type="text" placeholder="Description" id="meeting_description" class="form-input">
+<div id="main">
+    <div><h1>Create meeting</h1></div>
+    <form id="meeting_info">
+        <input type="text" placeholder="Meeting name" id="meeting_name" class="form-input">
+        <input type="text" placeholder="Description" id="meeting_description" class="form-input">
 
-            <div class='input-group date' id='datetimepicker1'>
-                <input type='text' class="form-control form-input" />
-                <span class="input-group-addon">
+        <div class='input-group date' id='datetimepicker1'>
+            <input type='text' class="form-control form-input" />
+            <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-            </div>
-        </form>
-        <div style="margin:10px;"><button id="create" class="cart-item__button">Create meeting</button></div>
-    </div>
- <script>
+            </span>
+        </div>
+    </form>
+    <div style="margin:10px;"><button id="create" class="cart-item__button">Create meeting</button></div>
+</div>
+<script>
     $(document).ready(function() {
         let tg = window.Telegram.WebApp;
         tg.expand();
@@ -72,7 +56,7 @@
         $('#create').click(function() {
             let meeting_name = $('#meeting_name').val();
             let meeting_description = $('#meeting_description').val();
-            let meeting_date = $('#datetimepicker1').find('input').val();
+            let meeting_date = $('#datetimepicker1').find('input').val(); // Здесь исправление
 
             let data = {
                 meeting_name: meeting_name,
