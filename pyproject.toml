@@ -11,6 +11,7 @@ aiogram = "3"
 python-dotenv = "^1.0.1"
 asyncpg = "^0.29.0"
 sqlalchemy = "^2.0.29"
+pytz = "^2024.1"
 
 
 [build-system]

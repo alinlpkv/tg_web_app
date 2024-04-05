@@ -30,15 +30,18 @@ async def open_app(message: types.Message) -> None:
 
 @router.message(F.web_app_data)
 async def web_app(message: types.Message):
-    meeting_crud = MeetingCRUD()
+    # meeting_crud = MeetingCRUD()
     data = json.loads(message.web_app_data.data)
-    meeting_name = data.get('meeting_name')
-    await message.answer(f'Meeting "{meeting_name}" created!')
-    user_email = await meeting_crud.get_user_email(user_id=message.from_user.id)
-    print(user_email, message.from_user.id)
-    data['user_id'] = message.from_user.id
-    data['user_email'] = user_email
-    await meeting_crud.add_meeting(data)
+    meeting_theme = data.get('meeting_theme')
+    meeting_date_start = data.get('meeting_date_start')
+    print(meeting_date_start)
+    await message.answer(f'Встреча "{meeting_theme}" создана!')
+    # user_email = await meeting_crud.get_user_email(user_id=message.from_user.id)
 
+    # data['user_id'] = message.from_user.id
+    # data['user_email'] = user_email
+    # await meeting_crud.add_meeting(data)
 
+def send_meeting():
+    pass
 # TODO: если второе поле даты пустое - заполнить на +1 минуту
