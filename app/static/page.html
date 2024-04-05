@@ -8,7 +8,6 @@
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
@@ -49,5 +48,30 @@
     </form>
     <div style="margin:10px;"><button id="create" class="cart-item__button">Create meeting</button></div>
 </div>
+<script>
+    $(document).ready(function() {
+        let tg = window.Telegram.WebApp;
+        tg.expand();
+
+        $('#create').click(function() {
+            let meeting_name = $('#meeting_name').val();
+            let meeting_description = $('#meeting_description').val();
+            let meeting_date = $('#datetimepicker1').find('input').val(); // Здесь исправление
+
+            let data = {
+                meeting_name: meeting_name,
+                meeting_description: meeting_description,
+                meeting_date: meeting_date
+            };
+
+            tg.sendData(JSON.stringify(data));
+            tg.close();
+        });
+
+        $('#datetimepicker1').datetimepicker({
+            locale: moment.locale('ru')
+        });
+    });
+</script>
 </body>
 </html>
