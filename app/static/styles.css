@@ -1,7 +1,4 @@
-body, html {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--body-background-color);
-    font-family: Arial, Verdana, sans-serif;
+body {
+    color: var(--tg-theme-text-color);
+    background: var(--tg-theme-bg-color);
 }
