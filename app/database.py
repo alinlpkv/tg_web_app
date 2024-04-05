@@ -1,5 +1,6 @@
 import asyncio
 import os
+import datetime as dt
 
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import create_async_engine
@@ -17,10 +18,12 @@ class MeetingCRUD:
 
     async def add_meeting(self, data: dict):
         user_id = data.get('user_id')
-        name = data.get('name')
-        description = data.get('description')
-        date = data.get('date')
+        name = data.get('meeting_name')
+        description = data.get('meeting_description')
+        date = data.get('meeting_date')
         user_email = data.get('user_email')
+        date = dt.datetime.strptime(date, '%Y-%m-%d',)
+
         query = text('insert into meeting (user_id, name, description, date, user_email) '
                      'values (:user_id, :name, :description, :date, :user_email)')
         async with self.engine.connect() as conn:
