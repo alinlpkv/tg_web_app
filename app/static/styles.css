@@ -1,4 +1,58 @@
 body {
-    color: var(--tg-theme-text-color);
-    background: var(--tg-theme-bg-color);
+    text-align: center;
+    align-items: center;
+    font-family: sans-serif;
+    color: white;
+}
+
+button {
+    padding: 10px 20px;
+    background: #4682B4;
+    border-radius: 5px;
+    border: 2px solid #4682B4;
+}
+
+button:hover {
+    background-color: white;
+    color: #4682B4;
+}
+
+.cart-item__button {
+    color: white;
+    font-size: 16px;
+}
+
+div {
+    margin-bottom: 10px;
+}
+
+input {
+    width: 80%;
+    outline: none;
+    border: 1px solid silver;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+textarea {
+    min-width:80vw;
+    min-height: 20vh;
+    border: 1px solid silver;
+    border-radius: 3px;
+}
+
+input:hover, textarea:hover, input:focus, textarea:focus {
+    border: 1px solid #4682B4;
+    outline: none;
+}
+
+
+.input-group.date {
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.input-group.date .form-control {
+    width: 100%;
 }
