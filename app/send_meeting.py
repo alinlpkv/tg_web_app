@@ -1,5 +1,6 @@
 import datetime
 import os
+import re
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
@@ -45,24 +46,29 @@ class SmtpSend:
 
     def send_meeting(self, data: dict):
         CRLF = "\r\n"
-        DATE_FORMAT = '%Y%m%dT%H%M%SZ'
+        DATE_FORMAT = '%Y%m%dT%H%M%S%Z'
 
         bot_name = 'ai-helper'
         organizer = f"ORGANIZER;CN=AI-помощник банкира:mailto:{bot_name}{CRLF} @mail.ru"
-        # email_to = "aelapikova@sberbank.ru"
         email_from = "ai-helper <ai-helper@mail.ru>"
 
         cur_date = datetime.datetime.now()
         dt_stamp = cur_date.strftime(DATE_FORMAT)
 
         # data from user
-        email_to = "m2211968@edu.misis.ru"
+        # email_to = "m2211968@edu.misis.ru"
+        email_to = data.get('user_email')
         meeting_start = data.get('meeting_date_start')
-        meeting_end = datetime.datetime(2024, 4, 6, 12, 30, tzinfo=timezone('Europe/Moscow'))
+        meeting_end = data.get('meeting_date_end')
+        if re.search(r'\w+@sber(bank)?.ru', email_to):
+            meeting_start -= datetime.timedelta(hours=3)
+            meeting_end -= datetime.timedelta(hours=3)
+
         meeting_start_frmt = meeting_start.strftime(DATE_FORMAT)
         meeting_end_frmt = meeting_end.strftime(DATE_FORMAT)
-        meeting_theme = 'Daily'
-        meeting_description = "DESCRIPTION: HI" + CRLF
+        print(meeting_start_frmt)
+        meeting_theme = data.get('meeting_theme')
+        meeting_description = f'DESCRIPTION: {data.get("meeting_description")}{CRLF}'
 
         email_to_frmt = (f"ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-    PARTICIPANT;PARTSTAT=ACCEPTED;RSVP=TRUE"
                          f"{CRLF} ;CN={email_to};X-NUM-GUESTS=0:{CRLF} mailto:{email_to}{CRLF}")

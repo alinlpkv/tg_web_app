@@ -1,9 +1,13 @@
 import asyncio
 import os
 import datetime as dt
+from typing import Any
 
-from sqlalchemy import text
+import pytz
+from sqlalchemy import text, select, insert
 from sqlalchemy.ext.asyncio import create_async_engine
+
+from app.models import UserMeeting, Whitelist
 
 
 class MeetingCRUD:
@@ -13,22 +17,30 @@ class MeetingCRUD:
 
     async def get_user_email(self, user_id):
         async with self.engine.connect() as conn:
-            email = await conn.execute(text(f'select user_email from whitelist where user_id={user_id}'))
+            query = select(Whitelist.user_email).where(Whitelist.user_id==user_id)
+            email = await conn.execute(query)
         return email.scalar()
 
-    async def add_meeting(self, data: dict):
+    async def add_meeting(self, data: dict[Any]):
         user_id = data.get('user_id')
-        name = data.get('meeting_name')
-        description = data.get('meeting_description')
-        date = data.get('meeting_date')
         user_email = data.get('user_email')
-        date = dt.datetime.strptime(date, '%d.%m.%Y %H:%M')
+        meeting_theme = data.get('meeting_theme')
+        meeting_description = data.get('meeting_description')
+        meeting_date_start = data.get('meeting_date_start')
+        meeting_date_end = data.get('meeting_date_end')
 
-        query = text('insert into meeting (user_id, name, description, date, user_email) '
-                     'values (:user_id, :name, :description, :date, :user_email)')
+        query = insert(UserMeeting).values(
+            user_id=user_id,
+            user_email=user_email,
+            meeting_theme=meeting_theme,
+            meeting_description=meeting_description,
+            meeting_date_start=meeting_date_start,
+            meeting_date_end=meeting_date_end
+        )
+        # query = text('insert into meeting (user_id, name, description, date, user_email) '
+        #              'values (:user_id, :name, :description, :date, :user_email)')
         async with self.engine.connect() as conn:
-            await conn.execute(query.bindparams(
-                user_id=user_id, name=name, description=description, date=date, user_email=user_email))
+            await conn.execute(query)
             await conn.commit()
 
 # async def s():
