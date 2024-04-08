@@ -1,0 +1,13 @@
+version: '3'
+services:
+  flask-service:
+    build: ./
+    container_name: flask-container
+    environment:
+      - DATA_BASE_URL=$DATA_BASE_URL
+      - MAIL_RU_LOGIN=$MAIL_RU_LOGIN
+      - MAIL_RU_PASSWORD=$MAIL_RU_PASSWORD
+#    restart: on-failure
+    ports:
+      - "9000:9000"
+    command: poetry run python web.py

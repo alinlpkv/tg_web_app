@@ -10,9 +10,9 @@ import json
 from typing import Union, Dict, Any
 from aiogram.filters import Filter
 from aiogram.types import Message
-from app.database import MeetingCRUD
-from app.constans import DEFAULT_THEME
-from app.send_meeting import SmtpSend
+from database import MeetingCRUD
+from constans import DEFAULT_THEME
+from send_meeting import SmtpSend
 
 router = Router()
 

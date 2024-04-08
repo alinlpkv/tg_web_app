@@ -7,7 +7,7 @@ import pytz
 from sqlalchemy import text, select, insert
 from sqlalchemy.ext.asyncio import create_async_engine
 
-from app.models import UserMeeting, Whitelist
+from models import UserMeeting, Whitelist
 
 
 class MeetingCRUD:

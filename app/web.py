@@ -10,8 +10,8 @@ from flask import (
     Request,
 )
 
-from app.database import MeetingCRUD
-from app.send_meeting import SmtpSend
+from database import MeetingCRUD
+from send_meeting import SmtpSend
 from constans import DEFAULT_THEME
 
 app = Flask(__name__)
@@ -40,8 +40,9 @@ async def create_meeting(user_id):
         data = reformat_data(request)
         meeting_crud = MeetingCRUD()
         user_email = await meeting_crud.get_user_email(user_id=int(user_id))
-        data['user_id'] = user_id
+        data['user_id'] = int(user_id)
         data['user_email'] = user_email
+        await meeting_crud.add_meeting(data)
         SmtpSend().send_meeting(data)
         return redirect(url_for('show_meetings', user_id=user_id))
     return render_template('create.html', user_id=user_id)
@@ -68,7 +69,7 @@ def reformat_data(request_: Request) -> dict[str: Any]:
 
 
 if __name__ == '__main__':
-    app.run(port=9000)
+    app.run(host='0.0.0.0', port=9000)
 
 
 # 342297636
