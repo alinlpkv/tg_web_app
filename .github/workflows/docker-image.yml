@@ -1,0 +1,36 @@
+name: web_app Docker
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Deploy docker compose
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: root
+          password: ${{ secrets.HOST_PASSWORD }}
+          port: 22
+          script: |
+            cd tg_web_app
+            git checkout main
+            git pull
+            export DATA_BASE_URL=${{ secrets.DATA_BASE_URL }}
+            export MAIL_RU_LOGIN=${{ secrets.MAIL_RU_LOGIN }}
+            export MAIL_RU_PASSWORD=${{ secrets.MAIL_RU_PASSWORD }}
+            docker compose down
+            docker stop $(docker ps)
+            docker container prune
+            docker rmi tg_web_app-flask-service:latest
+            docker builder prune
+            docker compose up -d --build 
