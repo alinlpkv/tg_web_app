@@ -21,13 +21,13 @@
     <div><h3>Создание встречи</h3></div>
 
     <form id="meeting_info" method="post">
+         <p id="errorMessage" style="color: red;"></p>
         <div class='input-group date' id='datetimepicker1'>
             <input type='text' placeholder="Время начала" class="form-control form-input" id="meeting_date_start" name="meeting_date_start" />
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
             </span>
         </div>
-        <p id="errorMessage" style="color: red;"></p>
         <div class='input-group date' id='datetimepicker2'>
             <input type='text' placeholder="Окончание" class="form-control form-input" name="meeting_date_end" />
             <span class="input-group-addon">
