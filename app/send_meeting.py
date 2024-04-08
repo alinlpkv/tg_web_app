@@ -56,19 +56,20 @@ class SmtpSend:
         dt_stamp = cur_date.strftime(DATE_FORMAT)
 
         # data from user
-        # email_to = "m2211968@edu.misis.ru"
         email_to = data.get('user_email')
+        # email_to = "m2211968@edu.misis.ru"
         meeting_start = data.get('meeting_date_start')
         meeting_end = data.get('meeting_date_end')
-        if re.search(r'\w+@sber(bank)?.ru', email_to):
-            meeting_start -= datetime.timedelta(hours=3)
-            meeting_end -= datetime.timedelta(hours=3)
+
+        user_timezone = data.get('timezone')
+        meeting_start += datetime.timedelta(hours=user_timezone)
+        meeting_end += datetime.timedelta(hours=user_timezone)
 
         meeting_start_frmt = meeting_start.strftime(DATE_FORMAT)
         meeting_end_frmt = meeting_end.strftime(DATE_FORMAT)
-        print(meeting_start_frmt)
+
         meeting_theme = data.get('meeting_theme')
-        meeting_description = f'DESCRIPTION: {data.get("meeting_description")}{CRLF}'
+        meeting_description = data.get("meeting_description")
 
         email_to_frmt = (f"ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-    PARTICIPANT;PARTSTAT=ACCEPTED;RSVP=TRUE"
                          f"{CRLF} ;CN={email_to};X-NUM-GUESTS=0:{CRLF} mailto:{email_to}{CRLF}")
@@ -78,11 +79,12 @@ class SmtpSend:
             f"METHOD:REQUEST{CRLF}BEGIN:VEVENT{CRLF}DTSTART:{meeting_start_frmt}{CRLF}DTEND:{meeting_end_frmt}{CRLF}"
             f"DTSTAMP:{dt_stamp}{CRLF}{organizer}{CRLF}"
             f"UID:FIXMEUID{dt_stamp}{CRLF}"
-            f"{email_to}CREATED:{dt_stamp}{CRLF}{meeting_description}LAST-MODIFIED:{dt_stamp}{CRLF}LOCATION:{CRLF}"
+            f"{email_to_frmt}CREATED:{dt_stamp}{CRLF}DESCRIPTION: {meeting_description}{CRLF}LAST-MODIFIED:{dt_stamp}{CRLF}LOCATION:{CRLF}"
             f"SEQUENCE:0{CRLF}STATUS:CONFIRMED{CRLF}"
             f"SUMMARY:{meeting_theme}{CRLF}TRANSP:OPAQUE{CRLF}END:VEVENT{CRLF}END:VCALENDAR{CRLF}"
         )
 
+        eml_body = meeting_description
         msg = MIMEMultipart('mixed')
         msg['Date'] = formatdate(localtime=True)
         msg['Reply-To'] = email_from
@@ -99,7 +101,11 @@ class SmtpSend:
         eml_atch = MIMEText('', 'plain')
         encoders.encode_base64(eml_atch)
         eml_atch.add_header('Content-Transfer-Encoding', "")
+
+        part_email = MIMEText(eml_body, "html")
+        msgAlternative.attach(part_email)
         msgAlternative.attach(MIMEText(ical, 'calendar;method=REQUEST'))
+
         mailServer = smtplib.SMTP_SSL('smtp.mail.ru', 465)
         mailServer.login(os.getenv('MAIL_RU_LOGIN'), os.getenv('MAIL_RU_PASSWORD'))
         mailServer.sendmail(email_from, email_to, msg.as_string())

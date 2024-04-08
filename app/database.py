@@ -37,22 +37,23 @@ class MeetingCRUD:
             meeting_date_start=meeting_date_start,
             meeting_date_end=meeting_date_end
         )
-        # query = text('insert into meeting (user_id, name, description, date, user_email) '
-        #              'values (:user_id, :name, :description, :date, :user_email)')
         async with self.engine.connect() as conn:
             await conn.execute(query)
             await conn.commit()
 
-# async def s():
-#     import os
-#     from dotenv import load_dotenv
-#     from sqlalchemy.ext.asyncio import create_async_engine
-#     load_dotenv()
-#     engine = create_async_engine(os.getenv('DATA_BASE_URL'))
-#     m = MeetingCRUD(engine)
-#     await m.get_user_email(342297636)
-#     await
-#
-#
-# if __name__ == '__main__':
-#     asyncio.run(s())
+    async def get_user_meetings(self, user_id: int):
+        query = (select(UserMeeting.meeting_theme, UserMeeting.meeting_date_start).
+                 where(UserMeeting.user_id==user_id).
+                 where(UserMeeting.meeting_date_end > dt.datetime.now())
+                 )
+        async with self.engine.connect() as conn:
+            meetings = await conn.execute(query)
+
+        return MeetingCRUD.data_as_dict(meetings)
+
+    @staticmethod
+    def data_as_dict(data) -> list[dict]:
+        data_list = []
+        for data_part in data:
+            data_list.append(data_part._asdict())
+        return data_list

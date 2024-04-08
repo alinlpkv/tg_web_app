@@ -23,10 +23,10 @@ async def open_app(message: types.Message) -> None:
     markup = types.ReplyKeyboardMarkup(
         resize_keyboard=True,
         keyboard=[
-            [types.KeyboardButton(text='open app', web_app=WebAppInfo(url=app_url))],
+            [types.KeyboardButton(text='Мои встречи', web_app=WebAppInfo(url=app_url))],
         ]
     )
-    await message.answer('For create meeting', reply_markup=markup)
+    await message.answer('Для работы со встречами нажмите', reply_markup=markup)
 
 
 @router.message(F.web_app_data)

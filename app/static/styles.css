@@ -2,8 +2,9 @@ body {
     text-align: center;
     align-items: center;
     font-family: sans-serif;
-    color: white;
+    color: black;
 }
+
 
 button {
     padding: 10px 20px;
@@ -17,13 +18,17 @@ button:hover {
     color: #4682B4;
 }
 
-.cart-item__button {
+.event-button {
     color: white;
     font-size: 16px;
 }
 
-div {
+.form-input {
     margin-bottom: 10px;
+}
+
+.event-button.create {
+    width: 40%;
 }
 
 input {
@@ -31,14 +36,24 @@ input {
     outline: none;
     border: 1px solid silver;
     border-radius: 3px;
-    padding: 5px;
+    padding: 10px;
 }
 
 textarea {
     min-width:80vw;
-    min-height: 20vh;
+    max-width:80vw;
     border: 1px solid silver;
     border-radius: 3px;
+}
+
+#meeting_description {
+    min-height: 20vh;
+    max-height: 20vh;
+}
+
+#meeting_theme {
+    min-height: 5vh;
+    max-height: 10vh;
 }
 
 input:hover, textarea:hover, input:focus, textarea:focus {
@@ -46,13 +61,40 @@ input:hover, textarea:hover, input:focus, textarea:focus {
     outline: none;
 }
 
-
 .input-group.date {
     width: 80%;
     margin: 0 auto;
     margin-bottom: 10px;
 }
 
-.input-group.date .form-control {
-    width: 100%;
+.input-group.date .form-control { width: 100%;}
+
+
+.first-line {
+    display: flex;
+}
+
+.first-line.title {
+    width: 55%;
+    display: flex;
+    align-items: center;
+}
+
+.first-line.title h2 {
+    margin: 15px auto;
+}
+
+.first-line.button {
+    width: 45%;
+    margin: 15px auto;
+}
+
+.meeting-table {
+    width: 98%;
+    align-items: center;
+    padding-left: 2%;
+}
+
+th {
+    text-align: center;
 }
