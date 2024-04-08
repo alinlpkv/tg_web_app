@@ -23,7 +23,7 @@ class UserMeeting(Base):
     __tablename__ = 'user_meeting'
 
     user_id = Column(ForeignKey('whitelist.user_id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
-    meeting_id = Column(Integer, primary_key=True)
+    meeting_id = Column(Integer, primary_key=True, autoincrement=True)
     meeting_theme = Column(Text, nullable=False, default='Напоминание')
     meeting_date_start = Column(DateTime, nullable=False)
     meeting_date_end = Column(DateTime, nullable=False)
