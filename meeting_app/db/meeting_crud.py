@@ -12,7 +12,7 @@ class MeetingCRUD:
     def __init__(self):
         self.engine = engine
 
-    async def get_user_email(self, user_id: int | str) -> str:
+    def get_user_email(self, user_id: int | str) -> str:
         """
         Получение почты пользователя по его id.
 
@@ -22,12 +22,12 @@ class MeetingCRUD:
         if isinstance(user_id, str):
             user_id = int(user_id)
 
-        async with self.engine.connect() as conn:
+        with self.engine.connect() as conn:
             query = select(Whitelist.user_email).where(Whitelist.user_id==user_id)
-            email = await conn.execute(query)
+            email = conn.execute(query)
         return email.scalar()
 
-    async def add_meeting(self, data: dict[str, Any]) -> None:
+    def add_meeting(self, data: dict[str, Any]) -> None:
         """
         Добавление новой встречи пользователя в бд.
 
@@ -48,11 +48,11 @@ class MeetingCRUD:
             meeting_date_start=meeting_date_start,
             meeting_date_end=meeting_date_end
         )
-        async with self.engine.connect() as conn:
-            await conn.execute(query)
-            await conn.commit()
+        with self.engine.connect() as conn:
+            conn.execute(query)
+            conn.commit()
 
-    async def get_user_meetings(self, user_id: int | str) -> list[dict[str, Any]]:
+    def get_user_meetings(self, user_id: int | str) -> list[dict[str, Any]]:
         """
         Получение всех предстоящих и идущих встреч пользователя.
 
@@ -65,8 +65,8 @@ class MeetingCRUD:
         query = (select(UserMeeting.meeting_theme, UserMeeting.meeting_date_start).
                  where(UserMeeting.user_id==user_id).
                  where(UserMeeting.meeting_date_end > dt.datetime.now()))
-        async with self.engine.connect() as conn:
-            meetings = await conn.execute(query)
+        with self.engine.connect() as conn:
+            meetings = conn.execute(query)
 
         return MeetingCRUD.data_as_dict(meetings)
 
