@@ -10,4 +10,4 @@ services:
 #    restart: on-failure
     ports:
       - "9000:9000"
-    command: poetry run python web.py
+    command: poetry run python app.py

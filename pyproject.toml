@@ -7,12 +7,12 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-aiogram = "3"
 python-dotenv = "^1.0.1"
 asyncpg = "^0.29.0"
 sqlalchemy = "^2.0.29"
 pytz = "^2024.1"
 flask = {extras = ["async"], version = "^3.0.2"}
+psycopg2-binary = "^2.9.9"
 
 
 [build-system]
