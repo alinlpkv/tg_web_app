@@ -27,6 +27,7 @@
             <button class="event-button">Создать встречу</button></a>
     </div>
 </div>
+{% if meetings %}
 <div class="meeting-table">
      <table class="table table-bordered">
    <thead>
@@ -37,12 +38,16 @@
   <tbody>
   {% for meeting in meetings %}
    <tr>
-      <td>{{ meeting['meeting_theme'] }}</td>
-       <td width="30%">{{ meeting['meeting_date_start'] }}</td>
+      <td>{{ meeting['theme'] }}</td>
+       <td width="30%">{{ meeting['date_start'] }}</td>
       </tr>
    {% endfor %}
   </tbody>
      </table>
 </div>
+{% else %}
+<h3>У вас пока нет новых встреч</h3>
+{% endif %}
+<script src="/static/script.js"></script>
 </body>
 </html>

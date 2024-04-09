@@ -14,7 +14,7 @@ def format_date(data: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return: данные о встречах пользователя с новым форматом времени начала
     """
     for i, row in enumerate(data):
-        data[i]['meeting_date_start'] = row['meeting_date_start'].strftime(DATE_PICKER_FORMAT)
+        data[i]['date_start'] = row['date_start'].strftime(DATE_PICKER_FORMAT)
     return data
 
 
@@ -27,11 +27,11 @@ def reformat_data(request_: Request) -> dict[str: Any]:
     """
     data = dict()
 
-    data['meeting_theme'] = request_.form['meeting_theme'] if request_.form['meeting_theme'] else DEFAULT_THEME
-    data['meeting_description'] = request_.form['meeting_description']
-    data['meeting_date_start'] = dt.datetime.strptime(request_.form['meeting_date_start'], DATE_PICKER_FORMAT)
-    data['meeting_date_end'] = dt.datetime.strptime(request_.form['meeting_date_end'], DATE_PICKER_FORMAT) \
-        if request_.form['meeting_date_end'] \
-        else data['meeting_date_start'] + dt.timedelta(minutes=1)
+    data['theme'] = request_.form['theme'] if request_.form['theme'].strip() else DEFAULT_THEME
+    data['description'] = request_.form['description']
+    data['date_start'] = dt.datetime.strptime(request_.form['date_start'], DATE_PICKER_FORMAT)
+    data['date_end'] = dt.datetime.strptime(request_.form['date_end'], DATE_PICKER_FORMAT) \
+        if request_.form['date_end'] \
+        else data['date_start'] + dt.timedelta(minutes=1)
     data['timezone'] = int(request_.form['timezoneOffset']) / 60
     return data

@@ -33,20 +33,13 @@ class MeetingCRUD:
 
         :param data: данные о встрече
         """
-        user_id = int(data.get('user_id'))
-        user_email = data.get('user_email')
-        meeting_theme = data.get('meeting_theme')
-        meeting_description = data.get('meeting_description')
-        meeting_date_start = data.get('meeting_date_start')
-        meeting_date_end = data.get('meeting_date_end')
 
         query = insert(UserMeeting).values(
-            user_id=user_id,
-            user_email=user_email,
-            meeting_theme=meeting_theme,
-            meeting_description=meeting_description,
-            meeting_date_start=meeting_date_start,
-            meeting_date_end=meeting_date_end
+            user_id=int(data.get('user_id')),
+            theme=data.get('theme'),
+            description=data.get('description'),
+            date_start=data.get('date_start'),
+            date_end=data.get('date_end')
         )
         with self.engine.connect() as conn:
             conn.execute(query)
@@ -62,13 +55,13 @@ class MeetingCRUD:
         if isinstance(user_id, str):
             user_id = int(user_id)
 
-        query = (select(UserMeeting.meeting_theme, UserMeeting.meeting_date_start).
+        query = (select(UserMeeting.theme, UserMeeting.date_start).
                  where(UserMeeting.user_id==user_id).
-                 where(UserMeeting.meeting_date_end > dt.datetime.now()))
+                 where(UserMeeting.date_end > dt.datetime.now()))
         with self.engine.connect() as conn:
             meetings = conn.execute(query)
 
-        return MeetingCRUD.data_as_dict(meetings)
+            return MeetingCRUD.data_as_dict(meetings)
 
     @staticmethod
     def data_as_dict(data: CursorResult) -> list[dict[str, Any]]:

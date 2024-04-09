@@ -21,12 +21,12 @@ class Whitelist(Base):
 
 class UserMeeting(Base):
     __tablename__ = 'user_meeting'
+    __table_args__ = {'comment': 'Перечень встреч пользователей'}
 
-    user_id = Column(ForeignKey('whitelist.user_id', onupdate='CASCADE', ondelete='CASCADE'), primary_key=True)
-    meeting_id = Column(Integer, primary_key=True, autoincrement=True)
-    meeting_theme = Column(Text, nullable=False, default='Напоминание')
-    meeting_date_start = Column(DateTime, nullable=False)
-    meeting_date_end = Column(DateTime, nullable=False)
-    meeting_description = Column(Text)
-    # user_email = Column(ForeignKey('whitelist.user_email', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
-    user_email = Column(String(100), nullable=False)
+    # TODO: работа с таймзоной по отправке уведомлений
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    user_id = Column(ForeignKey('whitelist.user_id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
+    theme = Column(Text, nullable=False, default='Напоминание', comment='Тема встречи')
+    date_start = Column(DateTime, nullable=False, comment='Время начала встречи')
+    date_end = Column(DateTime, nullable=False, comment='Время окончания встречи')
+    description = Column(Text, comment='Описание встречи')
