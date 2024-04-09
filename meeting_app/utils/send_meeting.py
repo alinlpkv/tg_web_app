@@ -42,7 +42,7 @@ class SmtpSend:
         mail = msg.as_string()
         self.server.sendmail(sender, recipient, mail)
 
-    def send_meeting(self, data: dict):
+    def send_meeting(self, user_email: str, data: dict):
         CRLF = "\r\n"
         DATE_FORMAT = '%Y%m%dT%H%M%S%Z'
 
@@ -54,10 +54,10 @@ class SmtpSend:
         dt_stamp = cur_date.strftime(DATE_FORMAT)
 
         # data from user
-        email_to = data.get('user_email')
+        email_to = user_email
         # email_to = "m2211968@edu.misis.ru"
-        meeting_start = data.get('meeting_date_start')
-        meeting_end = data.get('meeting_date_end')
+        meeting_start = data.get('date_start')
+        meeting_end = data.get('date_end')
 
         user_timezone = data.get('timezone')
         meeting_start += datetime.timedelta(hours=user_timezone)
@@ -66,8 +66,8 @@ class SmtpSend:
         meeting_start_frmt = meeting_start.strftime(DATE_FORMAT)
         meeting_end_frmt = meeting_end.strftime(DATE_FORMAT)
 
-        meeting_theme = data.get('meeting_theme')
-        meeting_description = data.get("meeting_description")
+        meeting_theme = data.get('theme')
+        meeting_description = data.get("description")
 
         email_to_frmt = (f"ATTENDEE;CUTYPE=INDIVIDUAL;ROLE=REQ-    PARTICIPANT;PARTSTAT=ACCEPTED;RSVP=TRUE"
                          f"{CRLF} ;CN={email_to};X-NUM-GUESTS=0:{CRLF} mailto:{email_to}{CRLF}")

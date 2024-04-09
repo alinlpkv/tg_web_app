@@ -46,12 +46,12 @@ textarea {
     border-radius: 3px;
 }
 
-#meeting_description {
+#description {
     min-height: 20vh;
     max-height: 20vh;
 }
 
-#meeting_theme {
+#theme {
     min-height: 5vh;
     max-height: 10vh;
 }

@@ -1,5 +1,4 @@
 
-from dotenv import load_dotenv
 from flask import (
     Flask,
     render_template,
@@ -12,7 +11,7 @@ from db.meeting_crud import MeetingCRUD
 from utils.send_meeting import SmtpSend
 from utils.change_data import format_date, reformat_data
 
-load_dotenv()
+
 app = Flask(__name__)
 
 
@@ -40,12 +39,13 @@ def show_meetings(user_id: str):
 def create_meeting(user_id: str):
     if request.method == 'POST':
         data = reformat_data(request)
-        user_email = meeting_crud.get_user_email(user_id=user_id)
-        print(user_email)
+
         data['user_id'] = user_id
-        data['user_email'] = user_email
         meeting_crud.add_meeting(data)
-        SmtpSend().send_meeting(data)
+
+        user_email = meeting_crud.get_user_email(user_id=user_id)
+        SmtpSend().send_meeting(user_email, data)
+
         return redirect(url_for('show_meetings', user_id=user_id))
     return render_template('create.html', user_id=user_id)
 
