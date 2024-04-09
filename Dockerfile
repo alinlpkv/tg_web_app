@@ -1,6 +1,6 @@
 FROM python:3.10-slim
 
-WORKDIR app
+WORKDIR meeting_app
 
 ENV TZ="Europe/Moscow"
 
@@ -14,4 +14,4 @@ COPY pyproject.toml .
 
 RUN poetry install
 
-COPY ./app .
+COPY ./meeting_app .
