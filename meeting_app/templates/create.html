@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/locale/ru.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
-    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ url_for('../static', filename='favicon.ico') }}">
     <title>Создание встречи</title>
 </head>
 <body>
@@ -42,10 +42,11 @@
             <textarea class="form-input" placeholder="Описание" id="description" name="description"></textarea>
         </div>
         <input type="hidden" id="timezoneOffset" name="timezoneOffset" value="">
-        <a href="https://alinlpkv.github.io/meeting_pages/templates/meeting.html">
-        <button id="create" class="event-button create" type="submit">Создать</button></a>
+<!--        <a href="https://alinlpkv.github.io/meeting_pages/templates/meeting.html">-->
+        <button id="create" class="event-button create" type="submit">Создать</button>
+<!--        </a>-->
     </form>
 </div>
-<script src="../static/script.js"></script>
+<script src="../static/creation.js"></script>
 </body>
 </html>
