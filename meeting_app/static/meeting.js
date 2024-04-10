@@ -17,22 +17,17 @@ async function fetchData(user_id) {
 
         console.log(responseData);
 
-        if (responseData) {
-            if (responseData.length == 0) {
-                const deleteElement = document.querySelector("#container");
-                deleteElement.innerHTML = '';
-                return;
-            }
+        if (responseData.length == 0) {
+            const deleteElement = document.querySelector("#container");
+            deleteElement.innerHTML = '';
+            $('#noMeeting').text('У Вас пока нет новых встреч');
+            return;
+        }
 
-            if (responseData.length > 0) {
-                $('#noMeeting').text('');
-
-                $.each(responseData, function(index, meeting) {
-                    $('#meetingTable tbody').
-                    append('<tr><td>' + meeting.theme + '</td><td>' + meeting.date_start + '</td></tr>');
-                });
-            };
-        };
+        $.each(responseData, function(index, meeting) {
+            $('#meetingTable tbody').
+            append('<tr><td>' + meeting.theme + '</td><td>' + meeting.date_start + '</td></tr>');
+        });
 
     } catch (error) {
         console.error("Ошибка при получении данных:", error);
