@@ -4,9 +4,9 @@ $(document).ready(function() {
     let tg = window.Telegram.WebApp;
     tg.expand();
 
-    if (tg.initData == '') {
-        $('body').empty();
-    }
+//    if (tg.initData == '') {
+//        $('body').empty();
+//    }
 
     let user_id = tg.initDataUnsafe.user.id
 

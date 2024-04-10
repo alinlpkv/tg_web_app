@@ -2,9 +2,9 @@
 $(document).ready(function() {
     let tg = window.Telegram.WebApp;
 
-    if (tg.initDataUnsafe == '') {
-        $('body').empty();
-    }
+//    if (tg.initDataUnsafe == '') {
+//        $('body').empty();
+//    }
 
 });
 
