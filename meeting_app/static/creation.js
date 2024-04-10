@@ -1,11 +1,10 @@
 
 $(document).ready(function() {
     let tg = window.Telegram.WebApp;
-    tg.expand();
 
-    //    if (tg.initData == '') {
-    //        $('body').empty();
-    //    }
+    if (tg.initDataUnsafe == '') {
+        $('body').empty();
+    }
 
 });
 
@@ -36,7 +35,8 @@ $("#datetimepicker1").on("dp.change", function (e) {
 function postData(user_data) {
     return new Promise(function(resolve, reject) {
         let tg = window.Telegram.WebApp;
-        let user_id = 342297636;
+        let user_id = tg.initDataUnsafe.user.id
+//        let user_id = 342297636;
         let query = "?user_id=" + user_id + "&" + "theme=" + user_data.theme +"&" + "date_start="+ user_data.date_start + "&" + "date_end="+ user_data.date_end + "&" +"description=" + user_data.description +  "&" +"timezone=" + user_data.timezone;
         console.log(query);
         fetch("http://localhost:8020/meeting/create" + query)
