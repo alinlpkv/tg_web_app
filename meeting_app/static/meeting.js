@@ -4,17 +4,19 @@ $(document).ready(function() {
     let tg = window.Telegram.WebApp;
     tg.expand();
 
-    //    if (tg.initData == '') {
-    //        $('body').empty();
-    //    }
+    if (tg.initData == '') {
+        $('body').empty();
+    }
 
-    fetchData();
+    let user_id = tg.initDataUnsafe.user.id
+
+    fetchData(user_id);
 
 });
 
 
-async function fetchData() {
-    let user_id = 342297636;
+async function fetchData(id_) {
+    let user_id = id_;
     try {
         const response = await fetch("http://localhost:8020/meeting/show/" + user_id);
         const responseData = await response.json();
