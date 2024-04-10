@@ -20,7 +20,7 @@ button:hover {
 
 .event-button {
     color: white;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .form-input {
@@ -72,16 +72,14 @@ input:hover, textarea:hover, input:focus, textarea:focus {
 
 .first-line {
     display: flex;
+
 }
 
 .first-line.title {
     width: 55%;
-    display: flex;
+    text-align: center;
+    margin: 15px 5%;
     align-items: center;
-}
-
-.first-line.title h2 {
-    margin: 15px auto;
 }
 
 .first-line.button {
@@ -97,4 +95,8 @@ input:hover, textarea:hover, input:focus, textarea:focus {
 
 th {
     text-align: center;
+}
+
+#noMeeting {
+    font-size: 14px;
 }
