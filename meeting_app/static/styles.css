@@ -27,10 +27,6 @@ button:hover {
     margin-bottom: 10px;
 }
 
-.event-button.create {
-    width: 40%;
-}
-
 input {
     width: 80%;
     outline: none;
@@ -72,7 +68,20 @@ input:hover, textarea:hover, input:focus, textarea:focus {
 
 .first-line {
     display: flex;
+}
 
+.end-line {
+    display: flex;
+    width: 80vw;
+    margin-left: 10vw;
+}
+
+.end-line div{
+    padding: 3px;
+}
+
+.end-line button{
+    height: 54px;
 }
 
 .first-line.title {
@@ -100,3 +109,8 @@ th {
 #noMeeting {
     font-size: 14px;
 }
+
+#create, #back {
+
+}
+
