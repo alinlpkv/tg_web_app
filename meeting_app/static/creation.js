@@ -35,8 +35,8 @@ $("#datetimepicker1").on("dp.change", function (e) {
 function postData(user_data) {
     return new Promise(function(resolve, reject) {
         let tg = window.Telegram.WebApp;
-        let user_id = tg.initDataUnsafe.user.id
-//        let user_id = 342297636;
+//        let user_id = tg.initDataUnsafe.user.id
+        let user_id = 342297636;
         let query = "?user_id=" + user_id + "&" + "theme=" + user_data.theme +"&" + "date_start="+ user_data.date_start + "&" + "date_end="+ user_data.date_end + "&" +"description=" + user_data.description +  "&" +"timezone=" + user_data.timezone;
         console.log(query);
         fetch("http://localhost:8020/meeting/create" + query)
@@ -56,7 +56,9 @@ function postData(user_data) {
 };
 
 
-$('form').submit(function(event) {
+$('#create').click(function(event) {
+    event.preventDefault();
+
     $('#errorMessageDateStart').text('');
     $('#errorMessageTheme').text('');
 
@@ -89,6 +91,9 @@ $('form').submit(function(event) {
     postData(meeting_data).
         then(function(response) {
             console.log('Данные успешно отправлены на сервер');
+            $('form')[0].reset(); // Сброс формы после успешной отправки
+            // Перенаправление на другую страницу
+            window.location.href = 'https://alinlpkv.github.io/meeting_pages/templates/meeting.html';
         })
         .catch(function(error) {
             console.error('Ошибка при отправке данных на сервер:', error);

@@ -21,7 +21,7 @@
     <div><h3>Создание встречи</h3></div>
 
     <form id="meeting_info">
-         <p id="errorMessageDateStart" style="color: red;"></p>
+        <p id="errorMessageDateStart" style="color: red;"></p>
         <div class='input-group date' id='datetimepicker1'>
             <input type='text' placeholder="Время начала" class="form-control form-input" id="date_start" name="date_start" />
             <span class="input-group-addon">
@@ -42,10 +42,11 @@
             <textarea class="form-input" placeholder="Описание" id="description" name="description"></textarea>
         </div>
         <input type="hidden" id="timezoneOffset" name="timezoneOffset" value="">
-        <a href="https://alinlpkv.github.io/meeting_pages/templates/meeting.html">
-        <button id="create" class="event-button create" type="submit">Создать</button>
-        </a>
+
     </form>
+<!--         <a href="https://alinlpkv.github.io/meeting_pages/templates/meeting.html">-->
+             <button id="create" class="event-button create">Создать</button>
+<!--         </a>-->
 </div>
 <script src="../static/creation.js"></script>
 </body>
