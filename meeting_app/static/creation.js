@@ -91,9 +91,8 @@ $('#create').click(function(event) {
     postData(meeting_data).
         then(function(response) {
             console.log('Данные успешно отправлены на сервер');
-            $('form')[0].reset(); // Сброс формы после успешной отправки
-            // Перенаправление на другую страницу
-            window.location.href = 'https://alinlpkv.github.io/meeting_pages/templates/meeting.html';
+            $('form')[0].reset();
+            window.location.href = 'https://alinlpkv.github.io/tg_web_app/meeting_app/templates/meeting.html';
         })
         .catch(function(error) {
             console.error('Ошибка при отправке данных на сервер:', error);
