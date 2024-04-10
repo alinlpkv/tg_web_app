@@ -13,41 +13,32 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="../static/styles.css">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <title>Meeting</title>
 </head>
 <body>
 <div class="first-line">
     <div class="first-line title">
-        <h2>Мои встречи</h2>
+        <h4>Мои встречи</h4>
     </div>
     <div class="first-line button">
-    <a href="{{ url_for('create_meeting', user_id=user_id) }}">
+    <a href="https://alinlpkv.github.io/meeting_pages/templates/create.html">
             <button class="event-button">Создать встречу</button></a>
     </div>
 </div>
-{% if meetings %}
 <div class="meeting-table">
-     <table class="table table-bordered">
+     <table class="table table-bordered" id="container">
    <thead>
     <tr>
       <th scope="col">Тема</th>
       <th scope="col">Дата</th>
   </thead>
   <tbody>
-  {% for meeting in meetings %}
-   <tr>
-      <td>{{ meeting['theme'] }}</td>
-       <td width="30%">{{ meeting['date_start'] }}</td>
-      </tr>
-   {% endfor %}
   </tbody>
      </table>
 </div>
-{% else %}
-<h3>У вас пока нет новых встреч</h3>
-{% endif %}
-<script src="/static/script.js"></script>
+<h5 id="noMeeting">У Вас пока нет новых встреч</h5>
+<script src="../static/script.js"></script>
 </body>
 </html>
