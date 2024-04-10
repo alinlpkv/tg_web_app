@@ -18,7 +18,7 @@ def format_date(data: list[dict[str, Any]]) -> list[dict[str, Any]]:
     return data
 
 
-def reformat_data(request_: Request) -> dict[str: Any]:
+def reformat_data(request_: dict) -> dict[str: Any]:
     """
     Получение и преобразование данных из формы
 
@@ -26,12 +26,11 @@ def reformat_data(request_: Request) -> dict[str: Any]:
     :return: отформатированные данные
     """
     data = dict()
-
-    data['theme'] = request_.form['theme'] if request_.form['theme'].strip() else DEFAULT_THEME
-    data['description'] = request_.form['description']
-    data['date_start'] = dt.datetime.strptime(request_.form['date_start'], DATE_PICKER_FORMAT)
-    data['date_end'] = dt.datetime.strptime(request_.form['date_end'], DATE_PICKER_FORMAT) \
-        if request_.form['date_end'] \
+    data['theme'] = request_.get('theme') if request_.get('theme', '').strip() else DEFAULT_THEME
+    data['description'] = request_.get('description', '')
+    data['date_start'] = dt.datetime.strptime(request_.get('date_start'), DATE_PICKER_FORMAT)
+    data['date_end'] = dt.datetime.strptime(request_.get('date_end'), DATE_PICKER_FORMAT) \
+        if request_.get('date_end') \
         else data['date_start'] + dt.timedelta(minutes=1)
-    data['timezone'] = int(request_.form['timezoneOffset']) / 60
+    data['timezone'] = int(request_.get('timezone')) / 60
     return data

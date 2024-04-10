@@ -33,24 +33,26 @@ $("#datetimepicker1").on("dp.change", function (e) {
 });
 
 
-async function postData(user_data) {
-      let tg = let tg = window.Telegram.WebApp;
-      console.log(tg.InitData);
-//    console.log(user_data)
-//    let user_id = 342297636;
-//    try {
-//        const response = await fetch("http://localhost:8020/meeting/create");
-//        const responseData = await response.text();
-//        console.log(responseData)
-//
-//        if (responseData === 'OK') {
-//            console.log('ok')
-//        }
-//    console.log('finish');
-//
-//    } catch (error) {
-//        console.error("Ошибка при получении данных:", error);
-//    }
+function postData(user_data) {
+    return new Promise(function(resolve, reject) {
+        let tg = window.Telegram.WebApp;
+        let user_id = 342297636;
+        let query = "?user_id=" + user_id + "&" + "theme=" + user_data.theme +"&" + "date_start="+ user_data.date_start + "&" + "date_end="+ user_data.date_end + "&" +"description=" + user_data.description +  "&" +"timezone=" + user_data.timezone;
+        console.log(query);
+        fetch("http://localhost:8020/meeting/create" + query)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Ошибка при отправке данных на сервер: ' + response.statusText);
+                }
+                return response.text();
+            })
+            .then(data => {
+                resolve(data);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
 };
 
 
@@ -58,13 +60,15 @@ $('form').submit(function(event) {
     $('#errorMessageDateStart').text('');
     $('#errorMessageTheme').text('');
 
-//    if ($('#date_start').val() === '') {
-//        event.preventDefault();
-//        $('#errorMessageDateStart').text('Заполните время начала встречи');
-//    }
+    if ($('#date_start').val() === '') {
+        event.preventDefault();
+        $('#errorMessageDateStart').text('Заполните время начала встречи');
+        return;
+    }
     if ($('#theme').val() === '') {
         event.preventDefault();
         $('#errorMessageTheme').text('Заполните тему встречи');
+        return;
     }
 
     let theme = $('#theme').val();
@@ -82,6 +86,13 @@ $('form').submit(function(event) {
         timezone: offset
     };
 
-    postData(meeting_data);
+    postData(meeting_data).
+        then(function(response) {
+            console.log('Данные успешно отправлены на сервер');
+        })
+        .catch(function(error) {
+            console.error('Ошибка при отправке данных на сервер:', error);
+        });
 
+//    event.preventDefault();
 });
