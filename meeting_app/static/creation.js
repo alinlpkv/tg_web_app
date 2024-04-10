@@ -92,7 +92,6 @@ $('#create').click(function(event) {
         then(function(response) {
             console.log('Данные успешно отправлены на сервер');
             $('form')[0].reset();
-            location.href = 'https://alinlpkv.github.io/tg_web_app/meeting_app/templates/meeting.html';
         })
         .catch(function(error) {
             console.error('Ошибка при отправке данных на сервер:', error);
