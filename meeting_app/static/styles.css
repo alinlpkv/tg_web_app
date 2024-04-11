@@ -18,7 +18,7 @@ button:hover {
     color: #4682B4;
 }
 
-.event-button {
+.create-main, .event-button {
     color: white;
     font-size: 14px;
 }
@@ -66,34 +66,40 @@ input:hover, textarea:hover, input:focus, textarea:focus {
 .input-group.date .form-control { width: 100%;}
 
 
-.first-line {
+.first-line, .end-line {
     display: flex;
-}
-
-.end-line {
-    display: flex;
-    width: 80vw;
-    margin-left: 10vw;
-}
-
-.end-line div{
-    padding: 3px;
-}
-
-.end-line button{
-    height: 54px;
-}
-
-.first-line.title {
-    width: 55%;
-    text-align: center;
-    margin: 15px 5%;
     align-items: center;
 }
 
+
+.end-line div{
+    width: 50%;
+}
+
+.event-button.create {
+    padding: 2px;
+    height: 54px;
+    width: 60%;
+    margin-right:0;
+}
+
+.event-button.back {
+    padding: 2px;
+    height: 54px;
+    width: 60%;
+    margin:0;
+}
+
+
+.first-line.title {
+    width: 80%;
+    padding-left: 10vw;
+    padding-top: 10px;
+}
+
 .first-line.button {
-    width: 45%;
-    margin: 15px auto;
+    padding-right: 10px;
+    padding-top: 10px;
 }
 
 .meeting-table {
@@ -109,8 +115,3 @@ th {
 #noMeeting {
     font-size: 14px;
 }
-
-#create, #back {
-
-}
-

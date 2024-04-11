@@ -24,6 +24,7 @@ async function fetchData(user_id) {
             return;
         }
 
+        $('#noMeeting').text('');
         $.each(responseData, function(index, meeting) {
             $('#meetingTable tbody').
             append('<tr><td>' + meeting.theme + '</td><td>' + meeting.date_start + '</td></tr>');
@@ -31,6 +32,8 @@ async function fetchData(user_id) {
 
     } catch (error) {
         console.error("Ошибка при получении данных:", error);
+        const deleteElement = document.querySelector("#container");
+        deleteElement.innerHTML = '';
     }
 };
 
