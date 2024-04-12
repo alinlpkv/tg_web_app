@@ -38,7 +38,7 @@ function postData(user_data) {
                     `description=${user_data.description}&timezone=${user_data.timezone}`;
 
         console.log(query);
-        fetch(`http://77.232.128.211:8020/meeting/create${query}`)
+        fetch(`https://cors-anywhere.herokuapp.com/http://77.232.128.211:8020/meeting/create${query}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Ошибка при отправке данных на сервер: ' + response.statusText);
