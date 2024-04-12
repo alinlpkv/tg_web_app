@@ -13,7 +13,7 @@ fetchData(user_id);
 async function fetchData(user_id) {
 
     try {
-        const response = await fetch(`https://cors-anywhere.herokuapp.com/http://77.232.128.211:8020/meeting/show/${user_id}`);
+        const response = await fetch(`https://ai-bankir-helper-dev.ru/meeting/show/${user_id}`);
         const responseData = await response.json();
 
         console.log(responseData);
