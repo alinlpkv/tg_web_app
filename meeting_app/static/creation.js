@@ -4,8 +4,8 @@ let tg = window.Telegram.WebApp;
 //    $('body').empty();
 //}
 
-let user_id = tg?.initDataUnsafe?.user?.id || 342297636;
-
+//let user_id = tg?.initDataUnsafe?.user?.id || 342297636;
+let user_id = tg?.initDataUnsafe?.user?.id;
 
 $('#datetimepicker1').datetimepicker({
     locale: moment.locale('ru')
