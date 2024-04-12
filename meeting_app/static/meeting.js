@@ -13,7 +13,7 @@ fetchData(user_id);
 async function fetchData(user_id) {
 
     try {
-        const response = await fetch(`http://77.232.128.211:8020/meeting/show/${user_id}`);
+        const response = await fetch(`http://localhost:8020/meeting/show/${user_id}`);
         const responseData = await response.json();
 
         console.log(responseData);
