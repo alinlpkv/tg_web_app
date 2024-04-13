@@ -38,7 +38,7 @@ function postData(user_data) {
                     `description=${user_data.description}&timezone=${user_data.timezone}`;
 
         console.log(query);
-        fetch(`https://ai-bankir-helper-dev.ru/meeting/create${query}`)
+        fetch(`https://ai-bankir-helper.ru/meeting/create${query}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Ошибка при отправке данных на сервер: ' + response.statusText);
